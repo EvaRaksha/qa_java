@@ -13,7 +13,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -49,9 +49,33 @@ public class LionTest {
         }
     }
 
+    @Test
+    public void testDoesHaveManeForMale() throws Exception {
+        Lion lion = new Lion("Самец", felineMock);
+        assertTrue(lion.doesHaveMane());
+    }
+
+    @Test
+    public void testDoesHaveManeForFemale() throws Exception {
+        Lion lion = new Lion("Самка", felineMock);
+        assertFalse(lion.doesHaveMane());
+    }
+
     @Test(expected = IllegalArgumentException.class)
     public void testInvalidSex() {
         new Lion("Недопустимое значение пола", felineMock);
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void testGetKittensWhenFelineIsNull() {
+        Lion lion = new Lion("Самка", null);
+        lion.getKittens();
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void testGetFoodWhenFelineIsNull() throws Exception {
+        Lion lion = new Lion("Самец", null);
+        lion.getFood();
     }
 
     @Test
