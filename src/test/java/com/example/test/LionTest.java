@@ -4,27 +4,49 @@ import com.example.Feline;
 import com.example.Lion;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class LionTest {
 
     @Mock
+    static
     Feline felineMock;
 
-    @Test
-    public void testDoesHaveMane() throws Exception {
-        Lion maleLion = new Lion("Самец", felineMock);
-        Lion femaleLion = new Lion("Самка", felineMock);
-        assertTrue(maleLion.doesHaveMane());
-        assertFalse(femaleLion.doesHaveMane());
+    @RunWith(Parameterized.class)
+    public static class DoesHaveManeParameterizedTest {
+
+        @Parameters
+        public static Collection<Object[]> data() {
+            return Arrays.asList(new Object[][] {
+                    {"Самец", true},
+                    {"Самка", false},
+            });
+        }
+
+        private String sex;
+        private boolean expectedManeResult;
+
+        public DoesHaveManeParameterizedTest(String sex, boolean expectedManeResult) {
+            this.sex = sex;
+            this.expectedManeResult = expectedManeResult;
+        }
+
+        @Test
+        public void testDoesHaveMane() throws Exception {
+            Lion lion = new Lion(sex, felineMock);
+            assertEquals(expectedManeResult, lion.doesHaveMane());
+        }
     }
 
     @Test(expected = IllegalArgumentException.class)
