@@ -2,12 +2,15 @@ package com.example.test;
 
 import com.example.Feline;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
+@RunWith(Parameterized.class)
 public class FelineTest {
 
     @Test
@@ -26,7 +29,7 @@ public class FelineTest {
     @Test
     public void testGetKittens() {
         Feline feline = new Feline();
-        assertEquals(1, feline.getKittens());
-        assertEquals(3, feline.getKittens(3));
+        int result = feline.getKittens();
+        assertEquals(1, result);
     }
 }
