@@ -26,7 +26,12 @@ public class FelineTest {
     @Test
     public void testGetKittens() {
         Feline feline = new Feline();
-        int result = feline.getKittens();
-        assertEquals(1, result);
+        assertEquals(1, feline.getKittens());
+    }
+
+    @Test
+    public void testGetKittensWithParameter() {
+        Feline feline = new Feline();
+        assertEquals(3, feline.getKittens(3));
     }
 }

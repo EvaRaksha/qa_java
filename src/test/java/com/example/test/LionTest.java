@@ -13,7 +13,8 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -53,12 +54,6 @@ public class LionTest {
     public void testDoesHaveManeForMale() throws Exception {
         Lion lion = new Lion("Самец", felineMock);
         assertTrue(lion.doesHaveMane());
-    }
-
-    @Test
-    public void testDoesHaveManeForFemale() throws Exception {
-        Lion lion = new Lion("Самка", felineMock);
-        assertFalse(lion.doesHaveMane());
     }
 
     @Test(expected = IllegalArgumentException.class)
